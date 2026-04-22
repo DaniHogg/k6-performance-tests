@@ -1,0 +1,36 @@
+{
+  "name": "k6-performance-tests",
+  "version": "1.0.0",
+  "description": "Professional k6 performance testing suite for API and web applications",
+  "author": "Dani Hogg",
+  "license": "MIT",
+  "keywords": [
+    "k6",
+    "performance-testing",
+    "load-testing",
+    "qa",
+    "automation"
+  ],
+  "scripts": {
+    "test:baseline": "k6 run scripts/baseline.js",
+    "test:ramp-up": "k6 run scripts/ramp-up.js",
+    "test:soak": "k6 run scripts/soak.js",
+    "test:spike": "k6 run scripts/spike.js",
+    "test:stress": "k6 run scripts/stress.js",
+    "test:all": "k6 run scripts/baseline.js && k6 run scripts/ramp-up.js && k6 run scripts/soak.js && k6 run scripts/spike.js",
+    "test:cloud": "k6 cloud scripts/baseline.js",
+    "test:json": "k6 run scripts/baseline.js --out json=results/baseline.json",
+    "report": "node k6-summary.js"
+  },
+  "devDependencies": {
+    "k6": "^0.47.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DaniHogg/k6-performance-tests.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DaniHogg/k6-performance-tests/issues"
+  },
+  "homepage": "https://github.com/DaniHogg/k6-performance-tests#readme"
+}
