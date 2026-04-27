@@ -19,8 +19,12 @@ export const options = {
 const client = new ApiClient(urls.base, 100);
 
 export function setup() {
+  if (!urls.health) {
+    throw new Error('Missing urls.health. Check config/urls.js and environment configuration.');
+  }
+
   // Pre-test setup: verify target is reachable
-  const res = client.get(urls.health || '/health');
+  const res = client.get(urls.health);
   check(res, {
     'target is reachable': (r) => r.status === 200 || r.status === 404,
   });
