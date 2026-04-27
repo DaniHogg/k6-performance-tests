@@ -5,7 +5,15 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat&logo=node.js&logoColor=white)
 
-A professional **k6 performance testing suite** designed to measure, analyze, and optimize application performance at scale. Tests cover baseline performance, ramp-up load, sustained soak testing, spike scenarios, and stress testing.
+This repository contains examples of performance and load testing using k6.
+
+It is intended to demonstrate:
+- Basic performance testing concepts
+- Writing k6 test scripts using JavaScript
+- Running and interpreting performance test results
+
+This repository is intentionally scoped to learning and demonstration.
+It is not a full performance testing framework or production setup.
 
 ## Features
 
