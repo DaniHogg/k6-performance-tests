@@ -8,12 +8,8 @@ export const baseOptions = {
     'http_conn_duration': ['p(95)<200'],                 // Connection duration p95 < 200ms
     'checks': ['rate>0.95'],                             // Custom checks 95%+ pass rate
   },
-  ext: {
-    loadimpact: {
-      projectID: 3330657,  // k6 Cloud project ID (replace with your own)
-      name: 'Performance Tests',
-    },
-  },
+  // To enable k6 Cloud streaming, set K6_CLOUD_PROJECT_ID env var and uncomment:
+  // ext: { loadimpact: { projectID: Number(__ENV.K6_CLOUD_PROJECT_ID), name: 'Performance Tests' } },
 };
 
 // Scenario profiles for different test types
