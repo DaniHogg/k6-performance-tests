@@ -44,7 +44,12 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install --no-audit --no-fund
+          fi
 
       # Baseline runs on every trigger and is the primary showcase test.
       # handleSummary in baseline.js writes results/baseline-summary.json.
