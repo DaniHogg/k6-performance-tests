@@ -1,27 +1,30 @@
 // config/urls.js
 // Environment-driven URL configuration
+// Default target: the deployed QA Portfolio API on Render.
+// Override with BASE_URL env var: k6 run -e BASE_URL=http://localhost:8000 scripts/baseline.js
 
 const getBaseUrl = () => {
-  const env = __ENV.ENV || 'staging';
+  const env = __ENV.ENV || 'prod';
   const urlMap = {
-    dev: 'http://localhost:3000',
-    staging: __ENV.BASE_URL || 'https://api-staging.example.com',
-    prod: __ENV.BASE_URL || 'https://api.example.com',
+    dev: __ENV.BASE_URL || 'http://localhost:8000',
+    prod: __ENV.BASE_URL || 'https://qa-portfolio-api.onrender.com',
   };
-  
-  return urlMap[env] || urlMap.staging;
+
+  return urlMap[env] || urlMap.prod;
 };
 
 export const config = {
   baseUrl: getBaseUrl(),
-  apiEndpoint: __ENV.API_ENDPOINT || '/api/v1',
   timeout: __ENV.TIMEOUT || '30s',
 };
 
+// Relative paths — used directly with ApiClient, which prepends config.baseUrl.
+// The Render API has no version prefix; endpoints are at the root.
 export const urls = {
   base: config.baseUrl,
-  users: `${config.baseUrl}${config.apiEndpoint}/users`,
-  posts: `${config.baseUrl}${config.apiEndpoint}/posts`,
-  comments: `${config.baseUrl}${config.apiEndpoint}/comments`,
-  health: `${config.baseUrl}${config.apiEndpoint}/health`,
+  health: '/health',
+  users: '/users',
+  posts: '/posts',
+  // The Render API exposes comments via /posts/{id}/comments, not /comments.
+  // Scripts that need comments should use client.get(`/posts/${id}/comments`).
 };

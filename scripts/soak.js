@@ -48,10 +48,11 @@ export default function () {
 
   sleep(0.5);
 
-  // Endpoint 3: Comments listing
-  const commentsRes = client.get('/comments', { limit: 200 });
+  // Endpoint 3: Comments — scoped to a post on the Render API
+  const postIdForComments = (Math.floor(Math.random() * 5) + 1);
+  const commentsRes = client.get(`/posts/${postIdForComments}/comments`);
   check(commentsRes, {
-    'comments endpoint responds': (r) => r.status === 200 || r.status === 404,
+    'comments endpoint responds': (r) => r.status === 200,
   });
 
   sleep(1);

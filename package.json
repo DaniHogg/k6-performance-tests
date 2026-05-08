@@ -20,7 +20,8 @@
     "test:all": "k6 run scripts/baseline.js && k6 run scripts/ramp-up.js && k6 run scripts/soak.js && k6 run scripts/spike.js",
     "test:cloud": "k6 cloud scripts/baseline.js",
     "test:json": "k6 run scripts/baseline.js --out json=results/baseline.json",
-    "report": "node k6-summary.js"
+    "report": "node k6-summary.js",
+    "generate-k6-json": "node scripts/generate-k6-json.js"
   },
   "devDependencies": {
     "k6": "^0.47.0"

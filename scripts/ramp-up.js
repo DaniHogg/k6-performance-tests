@@ -44,7 +44,8 @@ export default function () {
     const usersRes = client.get('/users', { limit: 50 });
     assertStatus(usersRes, 200, 'List users OK');
     
-    const commentsRes = client.get('/comments', { limit: 30 });
+    // Comments are scoped to a post on the Render API: /posts/{id}/comments
+    const commentsRes = client.get('/posts/1/comments');
     assertStatus(commentsRes, 200, 'List comments OK');
   } else {
     // 30%: Create post (if API supports it)
