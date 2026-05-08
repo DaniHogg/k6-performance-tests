@@ -99,6 +99,14 @@ jobs:
         run: npm run report
         continue-on-error: true
 
+      - name: Ensure results artifact payload exists
+        if: always()
+        run: |
+          mkdir -p results
+          if [ ! -f results/run-metadata.json ]; then
+            printf '{"generated_by":"performance.yml","run_id":"%s"}\n' "${{ github.run_id }}" > results/run-metadata.json
+          fi
+
       - name: Upload results
         if: always()
         uses: actions/upload-artifact@v4
@@ -106,6 +114,8 @@ jobs:
           name: k6-results
           path: results/
           retention-days: 30
+          if-no-files-found: warn
+        continue-on-error: true
 
       # Upload the normalised summary as a separate artifact so the live site
       # workflow can download it by name via repository_dispatch.
@@ -116,6 +126,8 @@ jobs:
           name: k6-json
           path: results/k6-results.json
           retention-days: 30
+          if-no-files-found: warn
+        continue-on-error: true
 
       - name: Comment on PR
         if: github.event_name == 'pull_request'
@@ -170,6 +182,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: k6-results
+        continue-on-error: true
 
       - name: Display summary
         run: |
