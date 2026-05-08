@@ -23,9 +23,6 @@
     "report": "node k6-summary.js",
     "generate-k6-json": "node scripts/generate-k6-json.js"
   },
-  "devDependencies": {
-    "k6": "^0.47.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/DaniHogg/k6-performance-tests.git"

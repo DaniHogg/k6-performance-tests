@@ -43,13 +43,8 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm install --no-audit --no-fund
-          fi
+      - name: Skip npm install (no package dependencies)
+        run: echo "No npm dependencies to install; using k6 binary from setup-k6-action"
 
       # Baseline runs on every trigger and is the primary showcase test.
       # handleSummary in baseline.js writes results/baseline-summary.json.
